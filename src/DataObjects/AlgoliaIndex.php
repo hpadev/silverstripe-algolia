@@ -11,10 +11,14 @@ class AlgoliaIndex extends DataObject
     private static $db = [
         'ObjectID' => 'Int',
         'ObjectClassName' => 'Varchar(255)',
-        'ObjectLocale' => 'Varchar(10)',
+        'ObjectLocale' => 'Varchar(["default" => "en_US"])',
         'AlgoliaIndexed' => 'Datetime',
         'AlgoliaUUID' => 'Varchar(200)',
         'AlgoliaError' => 'Varchar(512)',
+    ];
+
+    private static $defaults = [
+        'ObjectLocale' => 'en_US',
     ];
 
     private static $indexes = [
