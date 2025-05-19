@@ -11,6 +11,7 @@ class AlgoliaIndex extends DataObject
     private static $db = [
         'ObjectID' => 'Int',
         'ObjectClassName' => 'Varchar(255)',
+        'ObjectLocale' => 'Varchar(10)',
         'AlgoliaIndexed' => 'Datetime',
         'AlgoliaUUID' => 'Varchar(200)',
         'AlgoliaError' => 'Varchar(512)',
@@ -19,7 +20,7 @@ class AlgoliaIndex extends DataObject
     private static $indexes = [
         'Object' => [
             'type' => 'unique',
-            'columns' => ['ObjectID', 'ObjectClassName'],
+            'columns' => ['ObjectID', 'ObjectClassName', 'ObjectLocale'],
         ],
         'AlgoliaUUID' => [
             'type' => 'unique',

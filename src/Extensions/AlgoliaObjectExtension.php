@@ -366,18 +366,21 @@ class AlgoliaObjectExtension extends DataExtension
         if (!$this->owner->algoliaIndexObject) {
             $algoliaIndex = AlgoliaIndex::get()->filter([
                 'ObjectID' => $this->owner->ID,
-                'ObjectClassName' => $this->owner->ClassName
+                'ObjectClassName' => $this->owner->ClassName,
+                'ObjectLocale' => $this->owner->Locale,
             ])->first();
 
             if (!$algoliaIndex || !$algoliaIndex->exists() && $this->owner->ID > 0) {
                 $algoliaIndex = AlgoliaIndex::create();
                 $algoliaIndex->ObjectID = $this->owner->ID;
                 $algoliaIndex->ObjectClassName = $this->owner->ClassName;
+                $algoliaIndex->ObjectLocale = $this->owner->Locale;
                 $uuid = Uuid::uuid4();
                 $algoliaIndex->AlgoliaUUID = $uuid->toString();
                 $algoliaIndex->AlgoliaIndexed = null;
                 $algoliaIndex->write();
             }
+
             $this->owner->algoliaIndexObject = $algoliaIndex;
         }
 
